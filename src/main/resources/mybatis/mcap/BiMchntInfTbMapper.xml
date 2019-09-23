@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smk.mapper.mcap.BiMchntInfTbMapper">
+  <resultMap id="BaseResultMap" type="com.smk.model.mcap.BiMchntInfTb">
+    <id column="MCHNTID" jdbcType="VARCHAR" property="mchntid" />
+    <result column="MCHNTNAME" jdbcType="VARCHAR" property="mchntname" />
+    <result column="TELNUMBER" jdbcType="VARCHAR" property="telnumber" />
+    <result column="LINKMAN" jdbcType="VARCHAR" property="linkman" />
+    <result column="PRIVATEKEY" jdbcType="VARCHAR" property="privatekey" />
+    <result column="PUBLICKEY" jdbcType="VARCHAR" property="publickey" />
+    <result column="STATE" jdbcType="CHAR" property="state" />
+    <result column="REQIP" jdbcType="VARCHAR" property="reqip" />
+    <result column="ISCHECKSIGN" jdbcType="CHAR" property="ischecksign" />
+    <result column="LASTUPDATEDATETIME" jdbcType="VARCHAR" property="lastupdatedatetime" />
+    <result column="ISUPDATEPUBKEY" jdbcType="CHAR" property="isupdatepubkey" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    MCHNTID, MCHNTNAME, TELNUMBER, LINKMAN, PRIVATEKEY, PUBLICKEY, STATE, REQIP, ISCHECKSIGN, 
+    LASTUPDATEDATETIME, ISUPDATEPUBKEY
+  </sql>
+  <select id="selectByExample" parameterType="com.smk.model.mcap.BiMchntInfTbExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from BIMCHNTINFTB
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BIMCHNTINFTB
+    where MCHNTID = #{mchntid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from BIMCHNTINFTB
+    where MCHNTID = #{mchntid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.smk.model.mcap.BiMchntInfTbExample">
+    delete from BIMCHNTINFTB
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.smk.model.mcap.BiMchntInfTb">
+    insert into BIMCHNTINFTB (MCHNTID, MCHNTNAME, TELNUMBER, 
+      LINKMAN, PRIVATEKEY, PUBLICKEY, 
+      STATE, REQIP, ISCHECKSIGN, 
+      LASTUPDATEDATETIME, ISUPDATEPUBKEY)
+    values (#{mchntid,jdbcType=VARCHAR}, #{mchntname,jdbcType=VARCHAR}, #{telnumber,jdbcType=VARCHAR}, 
+      #{linkman,jdbcType=VARCHAR}, #{privatekey,jdbcType=VARCHAR}, #{publickey,jdbcType=VARCHAR}, 
+      #{state,jdbcType=CHAR}, #{reqip,jdbcType=VARCHAR}, #{ischecksign,jdbcType=CHAR}, 
+      #{lastupdatedatetime,jdbcType=VARCHAR}, #{isupdatepubkey,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.smk.model.mcap.BiMchntInfTb">
+    insert into BIMCHNTINFTB
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mchntid != null">
+        MCHNTID,
+      </if>
+      <if test="mchntname != null">
+        MCHNTNAME,
+      </if>
+      <if test="telnumber != null">
+        TELNUMBER,
+      </if>
+      <if test="linkman != null">
+        LINKMAN,
+      </if>
+      <if test="privatekey != null">
+        PRIVATEKEY,
+      </if>
+      <if test="publickey != null">
+        PUBLICKEY,
+      </if>
+      <if test="state != null">
+        STATE,
+      </if>
+      <if test="reqip != null">
+        REQIP,
+      </if>
+      <if test="ischecksign != null">
+        ISCHECKSIGN,
+      </if>
+      <if test="lastupdatedatetime != null">
+        LASTUPDATEDATETIME,
+      </if>
+      <if test="isupdatepubkey != null">
+        ISUPDATEPUBKEY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="mchntid != null">
+        #{mchntid,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntname != null">
+        #{mchntname,jdbcType=VARCHAR},
+      </if>
+      <if test="telnumber != null">
+        #{telnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="linkman != null">
+        #{linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="privatekey != null">
+        #{privatekey,jdbcType=VARCHAR},
+      </if>
+      <if test="publickey != null">
+        #{publickey,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=CHAR},
+      </if>
+      <if test="reqip != null">
+        #{reqip,jdbcType=VARCHAR},
+      </if>
+      <if test="ischecksign != null">
+        #{ischecksign,jdbcType=CHAR},
+      </if>
+      <if test="lastupdatedatetime != null">
+        #{lastupdatedatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="isupdatepubkey != null">
+        #{isupdatepubkey,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.smk.model.mcap.BiMchntInfTbExample" resultType="java.lang.Long">
+    select count(*) from BIMCHNTINFTB
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update BIMCHNTINFTB
+    <set>
+      <if test="record.mchntid != null">
+        MCHNTID = #{record.mchntid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mchntname != null">
+        MCHNTNAME = #{record.mchntname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telnumber != null">
+        TELNUMBER = #{record.telnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.linkman != null">
+        LINKMAN = #{record.linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.privatekey != null">
+        PRIVATEKEY = #{record.privatekey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.publickey != null">
+        PUBLICKEY = #{record.publickey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null">
+        STATE = #{record.state,jdbcType=CHAR},
+      </if>
+      <if test="record.reqip != null">
+        REQIP = #{record.reqip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ischecksign != null">
+        ISCHECKSIGN = #{record.ischecksign,jdbcType=CHAR},
+      </if>
+      <if test="record.lastupdatedatetime != null">
+        LASTUPDATEDATETIME = #{record.lastupdatedatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isupdatepubkey != null">
+        ISUPDATEPUBKEY = #{record.isupdatepubkey,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update BIMCHNTINFTB
+    set MCHNTID = #{record.mchntid,jdbcType=VARCHAR},
+      MCHNTNAME = #{record.mchntname,jdbcType=VARCHAR},
+      TELNUMBER = #{record.telnumber,jdbcType=VARCHAR},
+      LINKMAN = #{record.linkman,jdbcType=VARCHAR},
+      PRIVATEKEY = #{record.privatekey,jdbcType=VARCHAR},
+      PUBLICKEY = #{record.publickey,jdbcType=VARCHAR},
+      STATE = #{record.state,jdbcType=CHAR},
+      REQIP = #{record.reqip,jdbcType=VARCHAR},
+      ISCHECKSIGN = #{record.ischecksign,jdbcType=CHAR},
+      LASTUPDATEDATETIME = #{record.lastupdatedatetime,jdbcType=VARCHAR},
+      ISUPDATEPUBKEY = #{record.isupdatepubkey,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.smk.model.mcap.BiMchntInfTb">
+    update BIMCHNTINFTB
+    <set>
+      <if test="mchntname != null">
+        MCHNTNAME = #{mchntname,jdbcType=VARCHAR},
+      </if>
+      <if test="telnumber != null">
+        TELNUMBER = #{telnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="linkman != null">
+        LINKMAN = #{linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="privatekey != null">
+        PRIVATEKEY = #{privatekey,jdbcType=VARCHAR},
+      </if>
+      <if test="publickey != null">
+        PUBLICKEY = #{publickey,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        STATE = #{state,jdbcType=CHAR},
+      </if>
+      <if test="reqip != null">
+        REQIP = #{reqip,jdbcType=VARCHAR},
+      </if>
+      <if test="ischecksign != null">
+        ISCHECKSIGN = #{ischecksign,jdbcType=CHAR},
+      </if>
+      <if test="lastupdatedatetime != null">
+        LASTUPDATEDATETIME = #{lastupdatedatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="isupdatepubkey != null">
+        ISUPDATEPUBKEY = #{isupdatepubkey,jdbcType=CHAR},
+      </if>
+    </set>
+    where MCHNTID = #{mchntid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.smk.model.mcap.BiMchntInfTb">
+    update BIMCHNTINFTB
+    set MCHNTNAME = #{mchntname,jdbcType=VARCHAR},
+      TELNUMBER = #{telnumber,jdbcType=VARCHAR},
+      LINKMAN = #{linkman,jdbcType=VARCHAR},
+      PRIVATEKEY = #{privatekey,jdbcType=VARCHAR},
+      PUBLICKEY = #{publickey,jdbcType=VARCHAR},
+      STATE = #{state,jdbcType=CHAR},
+      REQIP = #{reqip,jdbcType=VARCHAR},
+      ISCHECKSIGN = #{ischecksign,jdbcType=CHAR},
+      LASTUPDATEDATETIME = #{lastupdatedatetime,jdbcType=VARCHAR},
+      ISUPDATEPUBKEY = #{isupdatepubkey,jdbcType=CHAR}
+    where MCHNTID = #{mchntid,jdbcType=VARCHAR}
+  </update>
+</mapper>

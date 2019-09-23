@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smk.mapper.mcap.BiTxnDetailTbMapper">
+  <resultMap id="BaseResultMap" type="com.smk.model.mcap.BiTxnDetailTb">
+    <id column="LOCALSEQ" jdbcType="VARCHAR" property="localseq" />
+    <result column="MCHNTID" jdbcType="VARCHAR" property="mchntid" />
+    <result column="MCHNTSEQ" jdbcType="VARCHAR" property="mchntseq" />
+    <result column="INSERTDATE" jdbcType="VARCHAR" property="insertdate" />
+    <result column="INSERTTIME" jdbcType="VARCHAR" property="inserttime" />
+    <result column="REQSTR" jdbcType="VARCHAR" property="reqstr" />
+    <result column="RESSTR" jdbcType="VARCHAR" property="resstr" />
+    <result column="RESPCODE" jdbcType="VARCHAR" property="respcode" />
+    <result column="REQIP" jdbcType="VARCHAR" property="reqip" />
+    <result column="TXNTYPE" jdbcType="VARCHAR" property="txntype" />
+    <result column="RESPMSG" jdbcType="VARCHAR" property="respmsg" />
+    <result column="RETURNTIME" jdbcType="VARCHAR" property="returntime" />
+    <result column="DEALTIME" jdbcType="DECIMAL" property="dealtime" />
+    <result column="IP" jdbcType="VARCHAR" property="ip" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    LOCALSEQ, MCHNTID, MCHNTSEQ, INSERTDATE, INSERTTIME, REQSTR, RESSTR, RESPCODE, REQIP, 
+    TXNTYPE, RESPMSG, RETURNTIME, DEALTIME, IP
+  </sql>
+  <select id="selectByExample" parameterType="com.smk.model.mcap.BiTxnDetailTbExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from BITXNDETAILTB
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BITXNDETAILTB
+    where LOCALSEQ = #{localseq,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from BITXNDETAILTB
+    where LOCALSEQ = #{localseq,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.smk.model.mcap.BiTxnDetailTbExample">
+    delete from BITXNDETAILTB
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.smk.model.mcap.BiTxnDetailTb">
+    insert into BITXNDETAILTB (LOCALSEQ, MCHNTID, MCHNTSEQ, 
+      INSERTDATE, INSERTTIME, REQSTR, 
+      RESSTR, RESPCODE, REQIP, 
+      TXNTYPE, RESPMSG, RETURNTIME, 
+      DEALTIME, IP)
+    values (#{localseq,jdbcType=VARCHAR}, #{mchntid,jdbcType=VARCHAR}, #{mchntseq,jdbcType=VARCHAR}, 
+      #{insertdate,jdbcType=VARCHAR}, #{inserttime,jdbcType=VARCHAR}, #{reqstr,jdbcType=VARCHAR}, 
+      #{resstr,jdbcType=VARCHAR}, #{respcode,jdbcType=VARCHAR}, #{reqip,jdbcType=VARCHAR}, 
+      #{txntype,jdbcType=VARCHAR}, #{respmsg,jdbcType=VARCHAR}, #{returntime,jdbcType=VARCHAR}, 
+      #{dealtime,jdbcType=DECIMAL}, #{ip,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.smk.model.mcap.BiTxnDetailTb">
+    insert into BITXNDETAILTB
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="localseq != null">
+        LOCALSEQ,
+      </if>
+      <if test="mchntid != null">
+        MCHNTID,
+      </if>
+      <if test="mchntseq != null">
+        MCHNTSEQ,
+      </if>
+      <if test="insertdate != null">
+        INSERTDATE,
+      </if>
+      <if test="inserttime != null">
+        INSERTTIME,
+      </if>
+      <if test="reqstr != null">
+        REQSTR,
+      </if>
+      <if test="resstr != null">
+        RESSTR,
+      </if>
+      <if test="respcode != null">
+        RESPCODE,
+      </if>
+      <if test="reqip != null">
+        REQIP,
+      </if>
+      <if test="txntype != null">
+        TXNTYPE,
+      </if>
+      <if test="respmsg != null">
+        RESPMSG,
+      </if>
+      <if test="returntime != null">
+        RETURNTIME,
+      </if>
+      <if test="dealtime != null">
+        DEALTIME,
+      </if>
+      <if test="ip != null">
+        IP,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="localseq != null">
+        #{localseq,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntid != null">
+        #{mchntid,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntseq != null">
+        #{mchntseq,jdbcType=VARCHAR},
+      </if>
+      <if test="insertdate != null">
+        #{insertdate,jdbcType=VARCHAR},
+      </if>
+      <if test="inserttime != null">
+        #{inserttime,jdbcType=VARCHAR},
+      </if>
+      <if test="reqstr != null">
+        #{reqstr,jdbcType=VARCHAR},
+      </if>
+      <if test="resstr != null">
+        #{resstr,jdbcType=VARCHAR},
+      </if>
+      <if test="respcode != null">
+        #{respcode,jdbcType=VARCHAR},
+      </if>
+      <if test="reqip != null">
+        #{reqip,jdbcType=VARCHAR},
+      </if>
+      <if test="txntype != null">
+        #{txntype,jdbcType=VARCHAR},
+      </if>
+      <if test="respmsg != null">
+        #{respmsg,jdbcType=VARCHAR},
+      </if>
+      <if test="returntime != null">
+        #{returntime,jdbcType=VARCHAR},
+      </if>
+      <if test="dealtime != null">
+        #{dealtime,jdbcType=DECIMAL},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.smk.model.mcap.BiTxnDetailTbExample" resultType="java.lang.Long">
+    select count(*) from BITXNDETAILTB
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update BITXNDETAILTB
+    <set>
+      <if test="record.localseq != null">
+        LOCALSEQ = #{record.localseq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mchntid != null">
+        MCHNTID = #{record.mchntid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mchntseq != null">
+        MCHNTSEQ = #{record.mchntseq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.insertdate != null">
+        INSERTDATE = #{record.insertdate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inserttime != null">
+        INSERTTIME = #{record.inserttime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reqstr != null">
+        REQSTR = #{record.reqstr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resstr != null">
+        RESSTR = #{record.resstr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.respcode != null">
+        RESPCODE = #{record.respcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reqip != null">
+        REQIP = #{record.reqip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.txntype != null">
+        TXNTYPE = #{record.txntype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.respmsg != null">
+        RESPMSG = #{record.respmsg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.returntime != null">
+        RETURNTIME = #{record.returntime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dealtime != null">
+        DEALTIME = #{record.dealtime,jdbcType=DECIMAL},
+      </if>
+      <if test="record.ip != null">
+        IP = #{record.ip,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update BITXNDETAILTB
+    set LOCALSEQ = #{record.localseq,jdbcType=VARCHAR},
+      MCHNTID = #{record.mchntid,jdbcType=VARCHAR},
+      MCHNTSEQ = #{record.mchntseq,jdbcType=VARCHAR},
+      INSERTDATE = #{record.insertdate,jdbcType=VARCHAR},
+      INSERTTIME = #{record.inserttime,jdbcType=VARCHAR},
+      REQSTR = #{record.reqstr,jdbcType=VARCHAR},
+      RESSTR = #{record.resstr,jdbcType=VARCHAR},
+      RESPCODE = #{record.respcode,jdbcType=VARCHAR},
+      REQIP = #{record.reqip,jdbcType=VARCHAR},
+      TXNTYPE = #{record.txntype,jdbcType=VARCHAR},
+      RESPMSG = #{record.respmsg,jdbcType=VARCHAR},
+      RETURNTIME = #{record.returntime,jdbcType=VARCHAR},
+      DEALTIME = #{record.dealtime,jdbcType=DECIMAL},
+      IP = #{record.ip,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.smk.model.mcap.BiTxnDetailTb">
+    update BITXNDETAILTB
+    <set>
+      <if test="mchntid != null">
+        MCHNTID = #{mchntid,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntseq != null">
+        MCHNTSEQ = #{mchntseq,jdbcType=VARCHAR},
+      </if>
+      <if test="insertdate != null">
+        INSERTDATE = #{insertdate,jdbcType=VARCHAR},
+      </if>
+      <if test="inserttime != null">
+        INSERTTIME = #{inserttime,jdbcType=VARCHAR},
+      </if>
+      <if test="reqstr != null">
+        REQSTR = #{reqstr,jdbcType=VARCHAR},
+      </if>
+      <if test="resstr != null">
+        RESSTR = #{resstr,jdbcType=VARCHAR},
+      </if>
+      <if test="respcode != null">
+        RESPCODE = #{respcode,jdbcType=VARCHAR},
+      </if>
+      <if test="reqip != null">
+        REQIP = #{reqip,jdbcType=VARCHAR},
+      </if>
+      <if test="txntype != null">
+        TXNTYPE = #{txntype,jdbcType=VARCHAR},
+      </if>
+      <if test="respmsg != null">
+        RESPMSG = #{respmsg,jdbcType=VARCHAR},
+      </if>
+      <if test="returntime != null">
+        RETURNTIME = #{returntime,jdbcType=VARCHAR},
+      </if>
+      <if test="dealtime != null">
+        DEALTIME = #{dealtime,jdbcType=DECIMAL},
+      </if>
+      <if test="ip != null">
+        IP = #{ip,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where LOCALSEQ = #{localseq,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.smk.model.mcap.BiTxnDetailTb">
+    update BITXNDETAILTB
+    set MCHNTID = #{mchntid,jdbcType=VARCHAR},
+      MCHNTSEQ = #{mchntseq,jdbcType=VARCHAR},
+      INSERTDATE = #{insertdate,jdbcType=VARCHAR},
+      INSERTTIME = #{inserttime,jdbcType=VARCHAR},
+      REQSTR = #{reqstr,jdbcType=VARCHAR},
+      RESSTR = #{resstr,jdbcType=VARCHAR},
+      RESPCODE = #{respcode,jdbcType=VARCHAR},
+      REQIP = #{reqip,jdbcType=VARCHAR},
+      TXNTYPE = #{txntype,jdbcType=VARCHAR},
+      RESPMSG = #{respmsg,jdbcType=VARCHAR},
+      RETURNTIME = #{returntime,jdbcType=VARCHAR},
+      DEALTIME = #{dealtime,jdbcType=DECIMAL},
+      IP = #{ip,jdbcType=VARCHAR}
+    where LOCALSEQ = #{localseq,jdbcType=VARCHAR}
+  </update>
+</mapper>

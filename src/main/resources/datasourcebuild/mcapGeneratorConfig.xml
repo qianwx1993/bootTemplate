@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration
+		PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+		"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+
+<generatorConfiguration>
+	<!-- 数据库驱动包路径 -->
+	<classPathEntry location="D:/DataSource/ojdbc14.jar" />
+
+	<context id="context1" targetRuntime="MyBatis3">
+		<!-- 运行环境配置 -->
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
+		<!-- 生成注释配置 -->
+		<commentGenerator type="">
+			<!-- 是否取消注释 -->
+			<property name="suppressAllComments" value="true" />
+			<!-- 数据库注释支持 -->
+			<property name="addRemarkComments" value="true"/>
+			<!-- 时间格式设置 -->
+			<!--<property name="dateFormat" value="yyyy-MM-dd HH:mm:ss"/>-->
+		</commentGenerator>
+		<!-- 连接数据库 -->
+		<jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" connectionURL="jdbc:oracle:thin:@192.168.22.235:1521/auditdb" userId="smkmcap" password="smkmcap96225" />
+		<!-- 数值类型数据是否全部使用BigDecimal类型 -->
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+		<!-- 生成po类 -->
+		<javaModelGenerator targetPackage="com.smk.model.mcap" targetProject="src/main/java">
+			<property name="enableSubPackages" value="false" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		<!-- 生成xml映射文件 -->
+		<sqlMapGenerator targetPackage="mybatis.mcap" targetProject="src/main/resources">
+			<property name="enableSubPackages" value="false" />
+			<property name="isMergeable" value="false" />
+		</sqlMapGenerator>
+		<!-- 生成dao类 -->
+		<javaClientGenerator targetPackage="com.smk.mapper.mcap" targetProject="src/main/java" type="XMLMAPPER">
+			<property name="enableSubPackages" value="false" />
+		</javaClientGenerator>
+		<!-- 需要生产po类的表 -->
+		<!--<table schema="" tableName="bimchntinftb" domainObjectName="BiMchntInfTb" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+			<property name="ignoreQualifiersAtRuntime" value="true"></property>
+		</table>
+		<table schema="" tableName="bimchntmsgtypemaptb" domainObjectName="BiMchntMsgTypeMapTb" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+			<property name="ignoreQualifiersAtRuntime" value="true"></property>
+		</table>
+		<table schema="" tableName="biexptxnlogtb" domainObjectName="BiExpTxnLogTb" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+			<property name="ignoreQualifiersAtRuntime" value="true"></property>
+		</table>-->
+		<table schema="" tableName="bitxndetailtb" domainObjectName="BiTxnDetailTb" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+			<property name="ignoreQualifiersAtRuntime" value="true"></property>
+		</table>
+
+	</context>
+</generatorConfiguration>

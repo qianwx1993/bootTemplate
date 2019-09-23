@@ -1,0 +1,591 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smk.mapper.topzf.TblChannealDtlMapper">
+  <resultMap id="BaseResultMap" type="com.smk.model.topzf.TblChannealDtl">
+    <id column="CHANNEL" jdbcType="VARCHAR" property="channel" />
+    <id column="TOCHANNEL" jdbcType="VARCHAR" property="tochannel" />
+    <id column="TXNTYPE" jdbcType="VARCHAR" property="txntype" />
+    <id column="TXNDATE" jdbcType="VARCHAR" property="txndate" />
+    <id column="REQSEQ" jdbcType="VARCHAR" property="reqseq" />
+    <id column="MCHNTID" jdbcType="VARCHAR" property="mchntid" />
+    <result column="TXNTIME" jdbcType="VARCHAR" property="txntime" />
+    <result column="ORDERID" jdbcType="VARCHAR" property="orderid" />
+    <result column="CENTSEQ" jdbcType="VARCHAR" property="centseq" />
+    <result column="RETRIVLREF" jdbcType="VARCHAR" property="retrivlref" />
+    <result column="CARDNUMBER" jdbcType="VARCHAR" property="cardnumber" />
+    <result column="ACCOUNTNO" jdbcType="VARCHAR" property="accountno" />
+    <result column="TXNAMT" jdbcType="VARCHAR" property="txnamt" />
+    <result column="REQTYPE" jdbcType="VARCHAR" property="reqtype" />
+    <result column="SETTDATE" jdbcType="VARCHAR" property="settdate" />
+    <result column="KEY_REVSAL" jdbcType="VARCHAR" property="keyRevsal" />
+    <result column="KEY_CANCEL" jdbcType="VARCHAR" property="keyCancel" />
+    <result column="TRANSSTATUS" jdbcType="VARCHAR" property="transstatus" />
+    <result column="ERRCODE" jdbcType="VARCHAR" property="errcode" />
+    <result column="ERRINFO" jdbcType="VARCHAR" property="errinfo" />
+    <result column="REQINFO" jdbcType="VARCHAR" property="reqinfo" />
+    <result column="SALEMODE" jdbcType="VARCHAR" property="salemode" />
+    <result column="RELCENTSEQ" jdbcType="DECIMAL" property="relcentseq" />
+    <result column="CARDKIND" jdbcType="DECIMAL" property="cardkind" />
+    <result column="PAYMODE" jdbcType="VARCHAR" property="paymode" />
+    <result column="RSVD1" jdbcType="VARCHAR" property="rsvd1" />
+    <result column="RSVD2" jdbcType="VARCHAR" property="rsvd2" />
+    <result column="RSVD3" jdbcType="VARCHAR" property="rsvd3" />
+    <result column="RSVD4" jdbcType="VARCHAR" property="rsvd4" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    CHANNEL, TOCHANNEL, TXNTYPE, TXNDATE, REQSEQ, MCHNTID, TXNTIME, ORDERID, CENTSEQ, 
+    RETRIVLREF, CARDNUMBER, ACCOUNTNO, TXNAMT, REQTYPE, SETTDATE, KEY_REVSAL, KEY_CANCEL, 
+    TRANSSTATUS, ERRCODE, ERRINFO, REQINFO, SALEMODE, RELCENTSEQ, CARDKIND, PAYMODE, 
+    RSVD1, RSVD2, RSVD3, RSVD4
+  </sql>
+  <select id="selectByExample" parameterType="com.smk.model.topzf.TblChannealDtlExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from TBLCHANNEALDTL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.smk.model.topzf.TblChannealDtlKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TBLCHANNEALDTL
+    where CHANNEL = #{channel,jdbcType=VARCHAR}
+      and TOCHANNEL = #{tochannel,jdbcType=VARCHAR}
+      and TXNTYPE = #{txntype,jdbcType=VARCHAR}
+      and TXNDATE = #{txndate,jdbcType=VARCHAR}
+      and REQSEQ = #{reqseq,jdbcType=VARCHAR}
+      and MCHNTID = #{mchntid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.smk.model.topzf.TblChannealDtlKey">
+    delete from TBLCHANNEALDTL
+    where CHANNEL = #{channel,jdbcType=VARCHAR}
+      and TOCHANNEL = #{tochannel,jdbcType=VARCHAR}
+      and TXNTYPE = #{txntype,jdbcType=VARCHAR}
+      and TXNDATE = #{txndate,jdbcType=VARCHAR}
+      and REQSEQ = #{reqseq,jdbcType=VARCHAR}
+      and MCHNTID = #{mchntid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.smk.model.topzf.TblChannealDtlExample">
+    delete from TBLCHANNEALDTL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.smk.model.topzf.TblChannealDtl">
+    insert into TBLCHANNEALDTL (CHANNEL, TOCHANNEL, TXNTYPE, 
+      TXNDATE, REQSEQ, MCHNTID, 
+      TXNTIME, ORDERID, CENTSEQ, 
+      RETRIVLREF, CARDNUMBER, ACCOUNTNO, 
+      TXNAMT, REQTYPE, SETTDATE, 
+      KEY_REVSAL, KEY_CANCEL, TRANSSTATUS, 
+      ERRCODE, ERRINFO, REQINFO, 
+      SALEMODE, RELCENTSEQ, CARDKIND, 
+      PAYMODE, RSVD1, RSVD2, 
+      RSVD3, RSVD4)
+    values (#{channel,jdbcType=VARCHAR}, #{tochannel,jdbcType=VARCHAR}, #{txntype,jdbcType=VARCHAR}, 
+      #{txndate,jdbcType=VARCHAR}, #{reqseq,jdbcType=VARCHAR}, #{mchntid,jdbcType=VARCHAR}, 
+      #{txntime,jdbcType=VARCHAR}, #{orderid,jdbcType=VARCHAR}, #{centseq,jdbcType=VARCHAR}, 
+      #{retrivlref,jdbcType=VARCHAR}, #{cardnumber,jdbcType=VARCHAR}, #{accountno,jdbcType=VARCHAR}, 
+      #{txnamt,jdbcType=VARCHAR}, #{reqtype,jdbcType=VARCHAR}, #{settdate,jdbcType=VARCHAR}, 
+      #{keyRevsal,jdbcType=VARCHAR}, #{keyCancel,jdbcType=VARCHAR}, #{transstatus,jdbcType=VARCHAR}, 
+      #{errcode,jdbcType=VARCHAR}, #{errinfo,jdbcType=VARCHAR}, #{reqinfo,jdbcType=VARCHAR}, 
+      #{salemode,jdbcType=VARCHAR}, #{relcentseq,jdbcType=DECIMAL}, #{cardkind,jdbcType=DECIMAL}, 
+      #{paymode,jdbcType=VARCHAR}, #{rsvd1,jdbcType=VARCHAR}, #{rsvd2,jdbcType=VARCHAR}, 
+      #{rsvd3,jdbcType=VARCHAR}, #{rsvd4,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.smk.model.topzf.TblChannealDtl">
+    insert into TBLCHANNEALDTL
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="channel != null">
+        CHANNEL,
+      </if>
+      <if test="tochannel != null">
+        TOCHANNEL,
+      </if>
+      <if test="txntype != null">
+        TXNTYPE,
+      </if>
+      <if test="txndate != null">
+        TXNDATE,
+      </if>
+      <if test="reqseq != null">
+        REQSEQ,
+      </if>
+      <if test="mchntid != null">
+        MCHNTID,
+      </if>
+      <if test="txntime != null">
+        TXNTIME,
+      </if>
+      <if test="orderid != null">
+        ORDERID,
+      </if>
+      <if test="centseq != null">
+        CENTSEQ,
+      </if>
+      <if test="retrivlref != null">
+        RETRIVLREF,
+      </if>
+      <if test="cardnumber != null">
+        CARDNUMBER,
+      </if>
+      <if test="accountno != null">
+        ACCOUNTNO,
+      </if>
+      <if test="txnamt != null">
+        TXNAMT,
+      </if>
+      <if test="reqtype != null">
+        REQTYPE,
+      </if>
+      <if test="settdate != null">
+        SETTDATE,
+      </if>
+      <if test="keyRevsal != null">
+        KEY_REVSAL,
+      </if>
+      <if test="keyCancel != null">
+        KEY_CANCEL,
+      </if>
+      <if test="transstatus != null">
+        TRANSSTATUS,
+      </if>
+      <if test="errcode != null">
+        ERRCODE,
+      </if>
+      <if test="errinfo != null">
+        ERRINFO,
+      </if>
+      <if test="reqinfo != null">
+        REQINFO,
+      </if>
+      <if test="salemode != null">
+        SALEMODE,
+      </if>
+      <if test="relcentseq != null">
+        RELCENTSEQ,
+      </if>
+      <if test="cardkind != null">
+        CARDKIND,
+      </if>
+      <if test="paymode != null">
+        PAYMODE,
+      </if>
+      <if test="rsvd1 != null">
+        RSVD1,
+      </if>
+      <if test="rsvd2 != null">
+        RSVD2,
+      </if>
+      <if test="rsvd3 != null">
+        RSVD3,
+      </if>
+      <if test="rsvd4 != null">
+        RSVD4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="channel != null">
+        #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="tochannel != null">
+        #{tochannel,jdbcType=VARCHAR},
+      </if>
+      <if test="txntype != null">
+        #{txntype,jdbcType=VARCHAR},
+      </if>
+      <if test="txndate != null">
+        #{txndate,jdbcType=VARCHAR},
+      </if>
+      <if test="reqseq != null">
+        #{reqseq,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntid != null">
+        #{mchntid,jdbcType=VARCHAR},
+      </if>
+      <if test="txntime != null">
+        #{txntime,jdbcType=VARCHAR},
+      </if>
+      <if test="orderid != null">
+        #{orderid,jdbcType=VARCHAR},
+      </if>
+      <if test="centseq != null">
+        #{centseq,jdbcType=VARCHAR},
+      </if>
+      <if test="retrivlref != null">
+        #{retrivlref,jdbcType=VARCHAR},
+      </if>
+      <if test="cardnumber != null">
+        #{cardnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="accountno != null">
+        #{accountno,jdbcType=VARCHAR},
+      </if>
+      <if test="txnamt != null">
+        #{txnamt,jdbcType=VARCHAR},
+      </if>
+      <if test="reqtype != null">
+        #{reqtype,jdbcType=VARCHAR},
+      </if>
+      <if test="settdate != null">
+        #{settdate,jdbcType=VARCHAR},
+      </if>
+      <if test="keyRevsal != null">
+        #{keyRevsal,jdbcType=VARCHAR},
+      </if>
+      <if test="keyCancel != null">
+        #{keyCancel,jdbcType=VARCHAR},
+      </if>
+      <if test="transstatus != null">
+        #{transstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="errcode != null">
+        #{errcode,jdbcType=VARCHAR},
+      </if>
+      <if test="errinfo != null">
+        #{errinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="reqinfo != null">
+        #{reqinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="salemode != null">
+        #{salemode,jdbcType=VARCHAR},
+      </if>
+      <if test="relcentseq != null">
+        #{relcentseq,jdbcType=DECIMAL},
+      </if>
+      <if test="cardkind != null">
+        #{cardkind,jdbcType=DECIMAL},
+      </if>
+      <if test="paymode != null">
+        #{paymode,jdbcType=VARCHAR},
+      </if>
+      <if test="rsvd1 != null">
+        #{rsvd1,jdbcType=VARCHAR},
+      </if>
+      <if test="rsvd2 != null">
+        #{rsvd2,jdbcType=VARCHAR},
+      </if>
+      <if test="rsvd3 != null">
+        #{rsvd3,jdbcType=VARCHAR},
+      </if>
+      <if test="rsvd4 != null">
+        #{rsvd4,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.smk.model.topzf.TblChannealDtlExample" resultType="java.lang.Long">
+    select count(*) from TBLCHANNEALDTL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update TBLCHANNEALDTL
+    <set>
+      <if test="record.channel != null">
+        CHANNEL = #{record.channel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tochannel != null">
+        TOCHANNEL = #{record.tochannel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.txntype != null">
+        TXNTYPE = #{record.txntype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.txndate != null">
+        TXNDATE = #{record.txndate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reqseq != null">
+        REQSEQ = #{record.reqseq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mchntid != null">
+        MCHNTID = #{record.mchntid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.txntime != null">
+        TXNTIME = #{record.txntime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderid != null">
+        ORDERID = #{record.orderid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.centseq != null">
+        CENTSEQ = #{record.centseq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.retrivlref != null">
+        RETRIVLREF = #{record.retrivlref,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardnumber != null">
+        CARDNUMBER = #{record.cardnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountno != null">
+        ACCOUNTNO = #{record.accountno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.txnamt != null">
+        TXNAMT = #{record.txnamt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reqtype != null">
+        REQTYPE = #{record.reqtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.settdate != null">
+        SETTDATE = #{record.settdate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keyRevsal != null">
+        KEY_REVSAL = #{record.keyRevsal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keyCancel != null">
+        KEY_CANCEL = #{record.keyCancel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transstatus != null">
+        TRANSSTATUS = #{record.transstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.errcode != null">
+        ERRCODE = #{record.errcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.errinfo != null">
+        ERRINFO = #{record.errinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reqinfo != null">
+        REQINFO = #{record.reqinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salemode != null">
+        SALEMODE = #{record.salemode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.relcentseq != null">
+        RELCENTSEQ = #{record.relcentseq,jdbcType=DECIMAL},
+      </if>
+      <if test="record.cardkind != null">
+        CARDKIND = #{record.cardkind,jdbcType=DECIMAL},
+      </if>
+      <if test="record.paymode != null">
+        PAYMODE = #{record.paymode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rsvd1 != null">
+        RSVD1 = #{record.rsvd1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rsvd2 != null">
+        RSVD2 = #{record.rsvd2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rsvd3 != null">
+        RSVD3 = #{record.rsvd3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rsvd4 != null">
+        RSVD4 = #{record.rsvd4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update TBLCHANNEALDTL
+    set CHANNEL = #{record.channel,jdbcType=VARCHAR},
+      TOCHANNEL = #{record.tochannel,jdbcType=VARCHAR},
+      TXNTYPE = #{record.txntype,jdbcType=VARCHAR},
+      TXNDATE = #{record.txndate,jdbcType=VARCHAR},
+      REQSEQ = #{record.reqseq,jdbcType=VARCHAR},
+      MCHNTID = #{record.mchntid,jdbcType=VARCHAR},
+      TXNTIME = #{record.txntime,jdbcType=VARCHAR},
+      ORDERID = #{record.orderid,jdbcType=VARCHAR},
+      CENTSEQ = #{record.centseq,jdbcType=VARCHAR},
+      RETRIVLREF = #{record.retrivlref,jdbcType=VARCHAR},
+      CARDNUMBER = #{record.cardnumber,jdbcType=VARCHAR},
+      ACCOUNTNO = #{record.accountno,jdbcType=VARCHAR},
+      TXNAMT = #{record.txnamt,jdbcType=VARCHAR},
+      REQTYPE = #{record.reqtype,jdbcType=VARCHAR},
+      SETTDATE = #{record.settdate,jdbcType=VARCHAR},
+      KEY_REVSAL = #{record.keyRevsal,jdbcType=VARCHAR},
+      KEY_CANCEL = #{record.keyCancel,jdbcType=VARCHAR},
+      TRANSSTATUS = #{record.transstatus,jdbcType=VARCHAR},
+      ERRCODE = #{record.errcode,jdbcType=VARCHAR},
+      ERRINFO = #{record.errinfo,jdbcType=VARCHAR},
+      REQINFO = #{record.reqinfo,jdbcType=VARCHAR},
+      SALEMODE = #{record.salemode,jdbcType=VARCHAR},
+      RELCENTSEQ = #{record.relcentseq,jdbcType=DECIMAL},
+      CARDKIND = #{record.cardkind,jdbcType=DECIMAL},
+      PAYMODE = #{record.paymode,jdbcType=VARCHAR},
+      RSVD1 = #{record.rsvd1,jdbcType=VARCHAR},
+      RSVD2 = #{record.rsvd2,jdbcType=VARCHAR},
+      RSVD3 = #{record.rsvd3,jdbcType=VARCHAR},
+      RSVD4 = #{record.rsvd4,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.smk.model.topzf.TblChannealDtl">
+    update TBLCHANNEALDTL
+    <set>
+      <if test="txntime != null">
+        TXNTIME = #{txntime,jdbcType=VARCHAR},
+      </if>
+      <if test="orderid != null">
+        ORDERID = #{orderid,jdbcType=VARCHAR},
+      </if>
+      <if test="centseq != null">
+        CENTSEQ = #{centseq,jdbcType=VARCHAR},
+      </if>
+      <if test="retrivlref != null">
+        RETRIVLREF = #{retrivlref,jdbcType=VARCHAR},
+      </if>
+      <if test="cardnumber != null">
+        CARDNUMBER = #{cardnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="accountno != null">
+        ACCOUNTNO = #{accountno,jdbcType=VARCHAR},
+      </if>
+      <if test="txnamt != null">
+        TXNAMT = #{txnamt,jdbcType=VARCHAR},
+      </if>
+      <if test="reqtype != null">
+        REQTYPE = #{reqtype,jdbcType=VARCHAR},
+      </if>
+      <if test="settdate != null">
+        SETTDATE = #{settdate,jdbcType=VARCHAR},
+      </if>
+      <if test="keyRevsal != null">
+        KEY_REVSAL = #{keyRevsal,jdbcType=VARCHAR},
+      </if>
+      <if test="keyCancel != null">
+        KEY_CANCEL = #{keyCancel,jdbcType=VARCHAR},
+      </if>
+      <if test="transstatus != null">
+        TRANSSTATUS = #{transstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="errcode != null">
+        ERRCODE = #{errcode,jdbcType=VARCHAR},
+      </if>
+      <if test="errinfo != null">
+        ERRINFO = #{errinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="reqinfo != null">
+        REQINFO = #{reqinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="salemode != null">
+        SALEMODE = #{salemode,jdbcType=VARCHAR},
+      </if>
+      <if test="relcentseq != null">
+        RELCENTSEQ = #{relcentseq,jdbcType=DECIMAL},
+      </if>
+      <if test="cardkind != null">
+        CARDKIND = #{cardkind,jdbcType=DECIMAL},
+      </if>
+      <if test="paymode != null">
+        PAYMODE = #{paymode,jdbcType=VARCHAR},
+      </if>
+      <if test="rsvd1 != null">
+        RSVD1 = #{rsvd1,jdbcType=VARCHAR},
+      </if>
+      <if test="rsvd2 != null">
+        RSVD2 = #{rsvd2,jdbcType=VARCHAR},
+      </if>
+      <if test="rsvd3 != null">
+        RSVD3 = #{rsvd3,jdbcType=VARCHAR},
+      </if>
+      <if test="rsvd4 != null">
+        RSVD4 = #{rsvd4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CHANNEL = #{channel,jdbcType=VARCHAR}
+      and TOCHANNEL = #{tochannel,jdbcType=VARCHAR}
+      and TXNTYPE = #{txntype,jdbcType=VARCHAR}
+      and TXNDATE = #{txndate,jdbcType=VARCHAR}
+      and REQSEQ = #{reqseq,jdbcType=VARCHAR}
+      and MCHNTID = #{mchntid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.smk.model.topzf.TblChannealDtl">
+    update TBLCHANNEALDTL
+    set TXNTIME = #{txntime,jdbcType=VARCHAR},
+      ORDERID = #{orderid,jdbcType=VARCHAR},
+      CENTSEQ = #{centseq,jdbcType=VARCHAR},
+      RETRIVLREF = #{retrivlref,jdbcType=VARCHAR},
+      CARDNUMBER = #{cardnumber,jdbcType=VARCHAR},
+      ACCOUNTNO = #{accountno,jdbcType=VARCHAR},
+      TXNAMT = #{txnamt,jdbcType=VARCHAR},
+      REQTYPE = #{reqtype,jdbcType=VARCHAR},
+      SETTDATE = #{settdate,jdbcType=VARCHAR},
+      KEY_REVSAL = #{keyRevsal,jdbcType=VARCHAR},
+      KEY_CANCEL = #{keyCancel,jdbcType=VARCHAR},
+      TRANSSTATUS = #{transstatus,jdbcType=VARCHAR},
+      ERRCODE = #{errcode,jdbcType=VARCHAR},
+      ERRINFO = #{errinfo,jdbcType=VARCHAR},
+      REQINFO = #{reqinfo,jdbcType=VARCHAR},
+      SALEMODE = #{salemode,jdbcType=VARCHAR},
+      RELCENTSEQ = #{relcentseq,jdbcType=DECIMAL},
+      CARDKIND = #{cardkind,jdbcType=DECIMAL},
+      PAYMODE = #{paymode,jdbcType=VARCHAR},
+      RSVD1 = #{rsvd1,jdbcType=VARCHAR},
+      RSVD2 = #{rsvd2,jdbcType=VARCHAR},
+      RSVD3 = #{rsvd3,jdbcType=VARCHAR},
+      RSVD4 = #{rsvd4,jdbcType=VARCHAR}
+    where CHANNEL = #{channel,jdbcType=VARCHAR}
+      and TOCHANNEL = #{tochannel,jdbcType=VARCHAR}
+      and TXNTYPE = #{txntype,jdbcType=VARCHAR}
+      and TXNDATE = #{txndate,jdbcType=VARCHAR}
+      and REQSEQ = #{reqseq,jdbcType=VARCHAR}
+      and MCHNTID = #{mchntid,jdbcType=VARCHAR}
+  </update>
+</mapper>

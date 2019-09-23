@@ -1,0 +1,16 @@
+spring:
+  profiles:
+    active: dev
+  resources:
+    static-locations: ["classpath:/static/","classpath:/templates/"]
+mybatis:
+  mapper-locations: classpath*:mybatis/*/**/*Mapper.xml
+management:
+  endpoints:
+    web:
+      base-path: /admin
+      exposure:
+        include: mappings,info,shutdown
+  endpoint:
+    shutdown:
+      enabled: true

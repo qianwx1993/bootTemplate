@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smk.mapper.mcap.BiExpTxnLogTbMapper">
+  <resultMap id="BaseResultMap" type="com.smk.model.mcap.BiExpTxnLogTb">
+    <id column="LOCALSEQ" jdbcType="VARCHAR" property="localseq" />
+    <result column="MCHNTID" jdbcType="VARCHAR" property="mchntid" />
+    <result column="CHMCHNTID" jdbcType="VARCHAR" property="chmchntid" />
+    <result column="POSID" jdbcType="VARCHAR" property="posid" />
+    <result column="CHPOSID" jdbcType="VARCHAR" property="chposid" />
+    <result column="BATCHID" jdbcType="VARCHAR" property="batchid" />
+    <result column="POSTYPE" jdbcType="VARCHAR" property="postype" />
+    <result column="CARDNUMBER" jdbcType="VARCHAR" property="cardnumber" />
+    <result column="CSN" jdbcType="VARCHAR" property="csn" />
+    <result column="CARDKIND" jdbcType="VARCHAR" property="cardkind" />
+    <result column="CARDID" jdbcType="VARCHAR" property="cardid" />
+    <result column="INSTDATE" jdbcType="VARCHAR" property="instdate" />
+    <result column="INSTTIME" jdbcType="VARCHAR" property="insttime" />
+    <result column="TXNTYPE" jdbcType="VARCHAR" property="txntype" />
+    <result column="TXNAMT" jdbcType="DECIMAL" property="txnamt" />
+    <result column="RESPCODE" jdbcType="VARCHAR" property="respcode" />
+    <result column="RESPMSG" jdbcType="VARCHAR" property="respmsg" />
+    <result column="CHANNEL" jdbcType="VARCHAR" property="channel" />
+    <result column="REQSTR" jdbcType="VARCHAR" property="reqstr" />
+    <result column="RESSTR" jdbcType="VARCHAR" property="resstr" />
+    <result column="CENTSEQ" jdbcType="VARCHAR" property="centseq" />
+    <result column="SETTDATE" jdbcType="VARCHAR" property="settdate" />
+    <result column="EXCEPTIONSTR" jdbcType="VARCHAR" property="exceptionstr" />
+    <result column="LASTUPDATETIME" jdbcType="VARCHAR" property="lastupdatetime" />
+    <result column="RSVD" jdbcType="VARCHAR" property="rsvd" />
+    <result column="RSVD1" jdbcType="VARCHAR" property="rsvd1" />
+    <result column="RSVD2" jdbcType="VARCHAR" property="rsvd2" />
+    <result column="RSVD3" jdbcType="VARCHAR" property="rsvd3" />
+    <result column="TERMSSN" jdbcType="VARCHAR" property="termssn" />
+    <result column="SUBTXNTYPE" jdbcType="VARCHAR" property="subtxntype" />
+    <result column="MCHNTSEQ" jdbcType="VARCHAR" property="mchntseq" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    LOCALSEQ, MCHNTID, CHMCHNTID, POSID, CHPOSID, BATCHID, POSTYPE, CARDNUMBER, CSN, 
+    CARDKIND, CARDID, INSTDATE, INSTTIME, TXNTYPE, TXNAMT, RESPCODE, RESPMSG, CHANNEL, 
+    REQSTR, RESSTR, CENTSEQ, SETTDATE, EXCEPTIONSTR, LASTUPDATETIME, RSVD, RSVD1, RSVD2, 
+    RSVD3, TERMSSN, SUBTXNTYPE, MCHNTSEQ
+  </sql>
+  <select id="selectByExample" parameterType="com.smk.model.mcap.BiExpTxnLogTbExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from BIEXPTXNLOGTB
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BIEXPTXNLOGTB
+    where LOCALSEQ = #{localseq,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from BIEXPTXNLOGTB
+    where LOCALSEQ = #{localseq,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.smk.model.mcap.BiExpTxnLogTbExample">
+    delete from BIEXPTXNLOGTB
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.smk.model.mcap.BiExpTxnLogTb">
+    insert into BIEXPTXNLOGTB (LOCALSEQ, MCHNTID, CHMCHNTID, 
+      POSID, CHPOSID, BATCHID, 
+      POSTYPE, CARDNUMBER, CSN, 
+      CARDKIND, CARDID, INSTDATE, 
+      INSTTIME, TXNTYPE, TXNAMT, 
+      RESPCODE, RESPMSG, CHANNEL, 
+      REQSTR, RESSTR, CENTSEQ, 
+      SETTDATE, EXCEPTIONSTR, LASTUPDATETIME, 
+      RSVD, RSVD1, RSVD2, 
+      RSVD3, TERMSSN, SUBTXNTYPE, 
+      MCHNTSEQ)
+    values (#{localseq,jdbcType=VARCHAR}, #{mchntid,jdbcType=VARCHAR}, #{chmchntid,jdbcType=VARCHAR}, 
+      #{posid,jdbcType=VARCHAR}, #{chposid,jdbcType=VARCHAR}, #{batchid,jdbcType=VARCHAR}, 
+      #{postype,jdbcType=VARCHAR}, #{cardnumber,jdbcType=VARCHAR}, #{csn,jdbcType=VARCHAR}, 
+      #{cardkind,jdbcType=VARCHAR}, #{cardid,jdbcType=VARCHAR}, #{instdate,jdbcType=VARCHAR}, 
+      #{insttime,jdbcType=VARCHAR}, #{txntype,jdbcType=VARCHAR}, #{txnamt,jdbcType=DECIMAL}, 
+      #{respcode,jdbcType=VARCHAR}, #{respmsg,jdbcType=VARCHAR}, #{channel,jdbcType=VARCHAR}, 
+      #{reqstr,jdbcType=VARCHAR}, #{resstr,jdbcType=VARCHAR}, #{centseq,jdbcType=VARCHAR}, 
+      #{settdate,jdbcType=VARCHAR}, #{exceptionstr,jdbcType=VARCHAR}, #{lastupdatetime,jdbcType=VARCHAR}, 
+      #{rsvd,jdbcType=VARCHAR}, #{rsvd1,jdbcType=VARCHAR}, #{rsvd2,jdbcType=VARCHAR}, 
+      #{rsvd3,jdbcType=VARCHAR}, #{termssn,jdbcType=VARCHAR}, #{subtxntype,jdbcType=VARCHAR}, 
+      #{mchntseq,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.smk.model.mcap.BiExpTxnLogTb">
+    insert into BIEXPTXNLOGTB
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="localseq != null">
+        LOCALSEQ,
+      </if>
+      <if test="mchntid != null">
+        MCHNTID,
+      </if>
+      <if test="chmchntid != null">
+        CHMCHNTID,
+      </if>
+      <if test="posid != null">
+        POSID,
+      </if>
+      <if test="chposid != null">
+        CHPOSID,
+      </if>
+      <if test="batchid != null">
+        BATCHID,
+      </if>
+      <if test="postype != null">
+        POSTYPE,
+      </if>
+      <if test="cardnumber != null">
+        CARDNUMBER,
+      </if>
+      <if test="csn != null">
+        CSN,
+      </if>
+      <if test="cardkind != null">
+        CARDKIND,
+      </if>
+      <if test="cardid != null">
+        CARDID,
+      </if>
+      <if test="instdate != null">
+        INSTDATE,
+      </if>
+      <if test="insttime != null">
+        INSTTIME,
+      </if>
+      <if test="txntype != null">
+        TXNTYPE,
+      </if>
+      <if test="txnamt != null">
+        TXNAMT,
+      </if>
+      <if test="respcode != null">
+        RESPCODE,
+      </if>
+      <if test="respmsg != null">
+        RESPMSG,
+      </if>
+      <if test="channel != null">
+        CHANNEL,
+      </if>
+      <if test="reqstr != null">
+        REQSTR,
+      </if>
+      <if test="resstr != null">
+        RESSTR,
+      </if>
+      <if test="centseq != null">
+        CENTSEQ,
+      </if>
+      <if test="settdate != null">
+        SETTDATE,
+      </if>
+      <if test="exceptionstr != null">
+        EXCEPTIONSTR,
+      </if>
+      <if test="lastupdatetime != null">
+        LASTUPDATETIME,
+      </if>
+      <if test="rsvd != null">
+        RSVD,
+      </if>
+      <if test="rsvd1 != null">
+        RSVD1,
+      </if>
+      <if test="rsvd2 != null">
+        RSVD2,
+      </if>
+      <if test="rsvd3 != null">
+        RSVD3,
+      </if>
+      <if test="termssn != null">
+        TERMSSN,
+      </if>
+      <if test="subtxntype != null">
+        SUBTXNTYPE,
+      </if>
+      <if test="mchntseq != null">
+        MCHNTSEQ,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="localseq != null">
+        #{localseq,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntid != null">
+        #{mchntid,jdbcType=VARCHAR},
+      </if>
+      <if test="chmchntid != null">
+        #{chmchntid,jdbcType=VARCHAR},
+      </if>
+      <if test="posid != null">
+        #{posid,jdbcType=VARCHAR},
+      </if>
+      <if test="chposid != null">
+        #{chposid,jdbcType=VARCHAR},
+      </if>
+      <if test="batchid != null">
+        #{batchid,jdbcType=VARCHAR},
+      </if>
+      <if test="postype != null">
+        #{postype,jdbcType=VARCHAR},
+      </if>
+      <if test="cardnumber != null">
+        #{cardnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="csn != null">
+        #{csn,jdbcType=VARCHAR},
+      </if>
+      <if test="cardkind != null">
+        #{cardkind,jdbcType=VARCHAR},
+      </if>
+      <if test="cardid != null">
+        #{cardid,jdbcType=VARCHAR},
+      </if>
+      <if test="instdate != null">
+        #{instdate,jdbcType=VARCHAR},
+      </if>
+      <if test="insttime != null">
+        #{insttime,jdbcType=VARCHAR},
+      </if>
+      <if test="txntype != null">
+        #{txntype,jdbcType=VARCHAR},
+      </if>
+      <if test="txnamt != null">
+        #{txnamt,jdbcType=DECIMAL},
+      </if>
+      <if test="respcode != null">
+        #{respcode,jdbcType=VARCHAR},
+      </if>
+      <if test="respmsg != null">
+        #{respmsg,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null">
+        #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="reqstr != null">
+        #{reqstr,jdbcType=VARCHAR},
+      </if>
+      <if test="resstr != null">
+        #{resstr,jdbcType=VARCHAR},
+      </if>
+      <if test="centseq != null">
+        #{centseq,jdbcType=VARCHAR},
+      </if>
+      <if test="settdate != null">
+        #{settdate,jdbcType=VARCHAR},
+      </if>
+      <if test="exceptionstr != null">
+        #{exceptionstr,jdbcType=VARCHAR},
+      </if>
+      <if test="lastupdatetime != null">
+        #{lastupdatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="rsvd != null">
+        #{rsvd,jdbcType=VARCHAR},
+      </if>
+      <if test="rsvd1 != null">
+        #{rsvd1,jdbcType=VARCHAR},
+      </if>
+      <if test="rsvd2 != null">
+        #{rsvd2,jdbcType=VARCHAR},
+      </if>
+      <if test="rsvd3 != null">
+        #{rsvd3,jdbcType=VARCHAR},
+      </if>
+      <if test="termssn != null">
+        #{termssn,jdbcType=VARCHAR},
+      </if>
+      <if test="subtxntype != null">
+        #{subtxntype,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntseq != null">
+        #{mchntseq,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.smk.model.mcap.BiExpTxnLogTbExample" resultType="java.lang.Long">
+    select count(*) from BIEXPTXNLOGTB
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update BIEXPTXNLOGTB
+    <set>
+      <if test="record.localseq != null">
+        LOCALSEQ = #{record.localseq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mchntid != null">
+        MCHNTID = #{record.mchntid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chmchntid != null">
+        CHMCHNTID = #{record.chmchntid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.posid != null">
+        POSID = #{record.posid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chposid != null">
+        CHPOSID = #{record.chposid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.batchid != null">
+        BATCHID = #{record.batchid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postype != null">
+        POSTYPE = #{record.postype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardnumber != null">
+        CARDNUMBER = #{record.cardnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csn != null">
+        CSN = #{record.csn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardkind != null">
+        CARDKIND = #{record.cardkind,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardid != null">
+        CARDID = #{record.cardid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.instdate != null">
+        INSTDATE = #{record.instdate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.insttime != null">
+        INSTTIME = #{record.insttime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.txntype != null">
+        TXNTYPE = #{record.txntype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.txnamt != null">
+        TXNAMT = #{record.txnamt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.respcode != null">
+        RESPCODE = #{record.respcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.respmsg != null">
+        RESPMSG = #{record.respmsg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channel != null">
+        CHANNEL = #{record.channel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reqstr != null">
+        REQSTR = #{record.reqstr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resstr != null">
+        RESSTR = #{record.resstr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.centseq != null">
+        CENTSEQ = #{record.centseq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.settdate != null">
+        SETTDATE = #{record.settdate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.exceptionstr != null">
+        EXCEPTIONSTR = #{record.exceptionstr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastupdatetime != null">
+        LASTUPDATETIME = #{record.lastupdatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rsvd != null">
+        RSVD = #{record.rsvd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rsvd1 != null">
+        RSVD1 = #{record.rsvd1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rsvd2 != null">
+        RSVD2 = #{record.rsvd2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rsvd3 != null">
+        RSVD3 = #{record.rsvd3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.termssn != null">
+        TERMSSN = #{record.termssn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subtxntype != null">
+        SUBTXNTYPE = #{record.subtxntype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mchntseq != null">
+        MCHNTSEQ = #{record.mchntseq,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update BIEXPTXNLOGTB
+    set LOCALSEQ = #{record.localseq,jdbcType=VARCHAR},
+      MCHNTID = #{record.mchntid,jdbcType=VARCHAR},
+      CHMCHNTID = #{record.chmchntid,jdbcType=VARCHAR},
+      POSID = #{record.posid,jdbcType=VARCHAR},
+      CHPOSID = #{record.chposid,jdbcType=VARCHAR},
+      BATCHID = #{record.batchid,jdbcType=VARCHAR},
+      POSTYPE = #{record.postype,jdbcType=VARCHAR},
+      CARDNUMBER = #{record.cardnumber,jdbcType=VARCHAR},
+      CSN = #{record.csn,jdbcType=VARCHAR},
+      CARDKIND = #{record.cardkind,jdbcType=VARCHAR},
+      CARDID = #{record.cardid,jdbcType=VARCHAR},
+      INSTDATE = #{record.instdate,jdbcType=VARCHAR},
+      INSTTIME = #{record.insttime,jdbcType=VARCHAR},
+      TXNTYPE = #{record.txntype,jdbcType=VARCHAR},
+      TXNAMT = #{record.txnamt,jdbcType=DECIMAL},
+      RESPCODE = #{record.respcode,jdbcType=VARCHAR},
+      RESPMSG = #{record.respmsg,jdbcType=VARCHAR},
+      CHANNEL = #{record.channel,jdbcType=VARCHAR},
+      REQSTR = #{record.reqstr,jdbcType=VARCHAR},
+      RESSTR = #{record.resstr,jdbcType=VARCHAR},
+      CENTSEQ = #{record.centseq,jdbcType=VARCHAR},
+      SETTDATE = #{record.settdate,jdbcType=VARCHAR},
+      EXCEPTIONSTR = #{record.exceptionstr,jdbcType=VARCHAR},
+      LASTUPDATETIME = #{record.lastupdatetime,jdbcType=VARCHAR},
+      RSVD = #{record.rsvd,jdbcType=VARCHAR},
+      RSVD1 = #{record.rsvd1,jdbcType=VARCHAR},
+      RSVD2 = #{record.rsvd2,jdbcType=VARCHAR},
+      RSVD3 = #{record.rsvd3,jdbcType=VARCHAR},
+      TERMSSN = #{record.termssn,jdbcType=VARCHAR},
+      SUBTXNTYPE = #{record.subtxntype,jdbcType=VARCHAR},
+      MCHNTSEQ = #{record.mchntseq,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.smk.model.mcap.BiExpTxnLogTb">
+    update BIEXPTXNLOGTB
+    <set>
+      <if test="mchntid != null">
+        MCHNTID = #{mchntid,jdbcType=VARCHAR},
+      </if>
+      <if test="chmchntid != null">
+        CHMCHNTID = #{chmchntid,jdbcType=VARCHAR},
+      </if>
+      <if test="posid != null">
+        POSID = #{posid,jdbcType=VARCHAR},
+      </if>
+      <if test="chposid != null">
+        CHPOSID = #{chposid,jdbcType=VARCHAR},
+      </if>
+      <if test="batchid != null">
+        BATCHID = #{batchid,jdbcType=VARCHAR},
+      </if>
+      <if test="postype != null">
+        POSTYPE = #{postype,jdbcType=VARCHAR},
+      </if>
+      <if test="cardnumber != null">
+        CARDNUMBER = #{cardnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="csn != null">
+        CSN = #{csn,jdbcType=VARCHAR},
+      </if>
+      <if test="cardkind != null">
+        CARDKIND = #{cardkind,jdbcType=VARCHAR},
+      </if>
+      <if test="cardid != null">
+        CARDID = #{cardid,jdbcType=VARCHAR},
+      </if>
+      <if test="instdate != null">
+        INSTDATE = #{instdate,jdbcType=VARCHAR},
+      </if>
+      <if test="insttime != null">
+        INSTTIME = #{insttime,jdbcType=VARCHAR},
+      </if>
+      <if test="txntype != null">
+        TXNTYPE = #{txntype,jdbcType=VARCHAR},
+      </if>
+      <if test="txnamt != null">
+        TXNAMT = #{txnamt,jdbcType=DECIMAL},
+      </if>
+      <if test="respcode != null">
+        RESPCODE = #{respcode,jdbcType=VARCHAR},
+      </if>
+      <if test="respmsg != null">
+        RESPMSG = #{respmsg,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null">
+        CHANNEL = #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="reqstr != null">
+        REQSTR = #{reqstr,jdbcType=VARCHAR},
+      </if>
+      <if test="resstr != null">
+        RESSTR = #{resstr,jdbcType=VARCHAR},
+      </if>
+      <if test="centseq != null">
+        CENTSEQ = #{centseq,jdbcType=VARCHAR},
+      </if>
+      <if test="settdate != null">
+        SETTDATE = #{settdate,jdbcType=VARCHAR},
+      </if>
+      <if test="exceptionstr != null">
+        EXCEPTIONSTR = #{exceptionstr,jdbcType=VARCHAR},
+      </if>
+      <if test="lastupdatetime != null">
+        LASTUPDATETIME = #{lastupdatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="rsvd != null">
+        RSVD = #{rsvd,jdbcType=VARCHAR},
+      </if>
+      <if test="rsvd1 != null">
+        RSVD1 = #{rsvd1,jdbcType=VARCHAR},
+      </if>
+      <if test="rsvd2 != null">
+        RSVD2 = #{rsvd2,jdbcType=VARCHAR},
+      </if>
+      <if test="rsvd3 != null">
+        RSVD3 = #{rsvd3,jdbcType=VARCHAR},
+      </if>
+      <if test="termssn != null">
+        TERMSSN = #{termssn,jdbcType=VARCHAR},
+      </if>
+      <if test="subtxntype != null">
+        SUBTXNTYPE = #{subtxntype,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntseq != null">
+        MCHNTSEQ = #{mchntseq,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where LOCALSEQ = #{localseq,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.smk.model.mcap.BiExpTxnLogTb">
+    update BIEXPTXNLOGTB
+    set MCHNTID = #{mchntid,jdbcType=VARCHAR},
+      CHMCHNTID = #{chmchntid,jdbcType=VARCHAR},
+      POSID = #{posid,jdbcType=VARCHAR},
+      CHPOSID = #{chposid,jdbcType=VARCHAR},
+      BATCHID = #{batchid,jdbcType=VARCHAR},
+      POSTYPE = #{postype,jdbcType=VARCHAR},
+      CARDNUMBER = #{cardnumber,jdbcType=VARCHAR},
+      CSN = #{csn,jdbcType=VARCHAR},
+      CARDKIND = #{cardkind,jdbcType=VARCHAR},
+      CARDID = #{cardid,jdbcType=VARCHAR},
+      INSTDATE = #{instdate,jdbcType=VARCHAR},
+      INSTTIME = #{insttime,jdbcType=VARCHAR},
+      TXNTYPE = #{txntype,jdbcType=VARCHAR},
+      TXNAMT = #{txnamt,jdbcType=DECIMAL},
+      RESPCODE = #{respcode,jdbcType=VARCHAR},
+      RESPMSG = #{respmsg,jdbcType=VARCHAR},
+      CHANNEL = #{channel,jdbcType=VARCHAR},
+      REQSTR = #{reqstr,jdbcType=VARCHAR},
+      RESSTR = #{resstr,jdbcType=VARCHAR},
+      CENTSEQ = #{centseq,jdbcType=VARCHAR},
+      SETTDATE = #{settdate,jdbcType=VARCHAR},
+      EXCEPTIONSTR = #{exceptionstr,jdbcType=VARCHAR},
+      LASTUPDATETIME = #{lastupdatetime,jdbcType=VARCHAR},
+      RSVD = #{rsvd,jdbcType=VARCHAR},
+      RSVD1 = #{rsvd1,jdbcType=VARCHAR},
+      RSVD2 = #{rsvd2,jdbcType=VARCHAR},
+      RSVD3 = #{rsvd3,jdbcType=VARCHAR},
+      TERMSSN = #{termssn,jdbcType=VARCHAR},
+      SUBTXNTYPE = #{subtxntype,jdbcType=VARCHAR},
+      MCHNTSEQ = #{mchntseq,jdbcType=VARCHAR}
+    where LOCALSEQ = #{localseq,jdbcType=VARCHAR}
+  </update>
+</mapper>

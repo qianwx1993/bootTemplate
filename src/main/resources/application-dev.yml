@@ -1,0 +1,49 @@
+server:
+  port: 18080
+logging:
+  path: ./logs
+  level:
+    root: debug
+    i.l.c.p: info
+spring:
+#  security:
+#    user:
+#      name: user
+#      password: a123456
+
+  datasource:
+    topzf:
+      type: com.alibaba.druid.pool.DruidDataSource
+      driverClassName: oracle.jdbc.driver.OracleDriver
+      url: jdbc:oracle:thin:@192.168.22.235:1521/nettest
+      username: topzfd
+      password: topzfd
+      initialSize: 10
+      minIdle: 5
+      maxActive: 50
+      maxWait: 10000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 20
+      filters: config,stat,wall
+
+    mcap:
+      type: com.alibaba.druid.pool.DruidDataSource
+      driverClassName: oracle.jdbc.driver.OracleDriver
+      url: jdbc:oracle:thin:@192.168.22.235:1521/auditdb
+      username: smkmcap
+      password: smkmcap96225
+      minimum-idle: 5
+      maximum-pool-size: 15
+      auto-commit: true
+      idle-timeout: 30000
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1 FROM DUAL
+      pool-name: DatebookHikariCP
+      driver-class-name: oracle.jdbc.driver.OracleDriver
